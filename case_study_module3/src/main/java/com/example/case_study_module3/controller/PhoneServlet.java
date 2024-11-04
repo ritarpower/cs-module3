@@ -55,8 +55,6 @@ public class PhoneServlet extends HttpServlet {
     }
 
     private void showAddForm(HttpServletRequest request, HttpServletResponse response) {
-        List<String> brands = phoneService.findAllBrand();
-        request.setAttribute("brands", brands);
         RequestDispatcher dispatcher = request.getRequestDispatcher("add.jsp");
         try {
             dispatcher.forward(request, response);
@@ -65,19 +63,16 @@ public class PhoneServlet extends HttpServlet {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         Phone phone = phoneService.findById(id);
-        List<String> brands = phoneService.findAllBrand();
         RequestDispatcher dispatcher;
         if (phone == null) {
             dispatcher = request.getRequestDispatcher("error-404.jsp");
         } else {
             request.setAttribute("phone", phone);
-            request.setAttribute("brands", brands);
             dispatcher = request.getRequestDispatcher("edit.jsp");
         }
         try {
@@ -169,8 +164,15 @@ public class PhoneServlet extends HttpServlet {
         String name = request.getParameter("name");
         int storage = Integer.parseInt(request.getParameter("storage"));
         List<Phone> phones = phoneService.findByNameAndStatus(name, storage);
-        request.setAttribute("phones", phones);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("find.jsp");
+        RequestDispatcher dispatcher;
+        if (phones.isEmpty()) {
+            request.setAttribute("message", "Không tìm thấy sản phẩm!");
+            dispatcher = request.getRequestDispatcher("find.jsp");
+        } else {
+            request.setAttribute("message", "Tìm thấy " + phones.size() + " sản phẩm:");
+            request.setAttribute("phones", phones);
+            dispatcher = request.getRequestDispatcher("find.jsp");
+        }
         try {
             dispatcher.forward(request, response);
         } catch (ServletException e) {

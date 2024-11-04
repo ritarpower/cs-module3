@@ -14,7 +14,6 @@ public class PhoneRepository implements IPhoneRepository {
     private final String ADD_PHONE = "INSERT INTO phone(phone_name,phone_price,phone_storage,phone_status,phone_origin,brand_id) VALUES (?, ?, ?, ?, ?, ?)";
     private final String EDIT_PHONE = "UPDATE phone SET phone_name = ?, phone_price = ?, phone_storage = ?, phone_status = ?, phone_origin = ?, brand_id = ? where phone_id = ?";
     private final String DELETE_PHONE = "DELETE FROM phone WHERE phone_id = ?";
-    private final String SELECT_ALL_BRAND = "SELECT brand_name FROM brand";
 
     @Override
     public List<Phone> findAll() {
@@ -128,23 +127,6 @@ public class PhoneRepository implements IPhoneRepository {
     }
 
     @Override
-    public List<String> findAllBrand() {
-        Connection c = baseRepository.getConnection();
-        List<String> brands = new ArrayList<>();
-        try {
-            Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery(SELECT_ALL_BRAND);
-            while (rs.next()) {
-                String brand = rs.getString("brand_name");
-                brands.add(brand);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return brands;
-    }
-
-    @Override
     public List<Phone> findByNameAndStatus(String name, int storage) {
         List<Phone> phones = new ArrayList<>();
         Connection c = baseRepository.getConnection();
@@ -158,8 +140,9 @@ public class PhoneRepository implements IPhoneRepository {
                 double price = rs.getDouble("phone_price");
                 String status = rs.getString("phone_status");
                 String origin = rs.getString("phone_origin");
+                int brandId = rs.getInt("brand_id");
                 PreparedStatement prepared = c.prepareStatement("SELECT brand_name FROM brand WHERE brand_id = ?");
-                prepared.setInt(1, id);
+                prepared.setInt(1, brandId);
                 ResultSet rs2 = prepared.executeQuery();
                 if (rs2.next()) {
                     String brand = rs2.getString("brand_name");

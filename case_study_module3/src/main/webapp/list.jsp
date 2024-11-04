@@ -39,6 +39,8 @@
             <td>${p.getPrice()} $</td>
             <td>${p.getStorage()} GB</td>
             <td>${p.getStatus()}</td>
+            <td>${p.getOrigin()}</td>
+            <td>${p.getBrand()}</td>
             <td><a href="?action=edit&id=${p.getId()}">Cập nhật</a></td>
             <td><a href="?action=delete&id=${p.getId()}">Xóa</a></td>
         </tr>

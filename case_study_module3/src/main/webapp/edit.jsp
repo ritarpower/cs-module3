@@ -10,54 +10,177 @@
 <html>
 <head>
     <title>Edit Phone</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        div {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 440px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #C20000;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            padding: 10px 0;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #155ab6;
+        }
+
+        a {
+            text-align: center;
+        }
+
+        legend {
+            font-size: 20px;
+        }
+
+        span {
+            font-size: 18px;
+            color: red;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            background-color: #e0e0e0;
+            color: #333;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #d0d0d0;
+        }
+    </style>
 </head>
 <body>
-<h1>Chỉnh sửa sản phẩm</h1>
+<div>
+    <h1>Chỉnh sửa sản phẩm</h1>
+</div>
 <p>
     <c:if test='${requestScope["message"] != null}'>
         <span class="message">${requestScope["message"]}</span>
     </c:if>
 </p>
-<p>
-    <a href="/">Quay lại danh sách sản phẩm</a>
-</p>
+
 <form method="post">
     <fieldset>
         <legend>Nhập thông tin mới của sản phẩm</legend>
         <table>
             <tr>
-                <td>Tên sản phẩm: </td>
-                <td><input type="text" name="name" id="name" value="${requestScope['phone'].getName()}"></td>
+                <td>Tên sản phẩm:</td>
+                <td><input type="text" name="name" id="name" value="${requestScope['phone'].getName()}" pattern="^[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$" required></td>
             </tr>
             <tr>
-                <td>Giá sản phẩm ($): </td>
-                <td><input type="number" name="price" id="price" value="${requestScope['phone'].getPrice()}"></td>
+                <td>Giá sản phẩm ($):</td>
+                <td><input type="number" name="price" id="price" value="${requestScope['phone'].getPrice()}" required>
+                </td>
             </tr>
             <tr>
-                <td>Dung lượng sản phẩm (GB): </td>
-                <td><input type="number" name="storage" id="storage" value="${requestScope['phone'].getStorage()}"></td>
-            </tr>
-            <tr>
-                <td>Trạng thái: </td>
+                <td>Dung lượng sản phẩm (GB):</td>
                 <td>
-                    <select id="status" name="status">
-                            <option <c:if test="${requestScope['phone'].getStatus() == 'Hàng mới'}">selected</c:if>>Hàng mới</option>
-                            <option <c:if test="${requestScope['phone'].getStatus() == 'Hàng đã sử dụng'}">selected</c:if>>Hàng đã sử dụng</option>
+                    <select id="storage" name="storage" required>
+                        <option <c:if test="${requestScope['phone'].getStorage() == '128'}">selected</c:if>>128</option>
+                        <option <c:if test="${requestScope['phone'].getStorage() == '256'}">selected</c:if>>256</option>
+                        <option <c:if test="${requestScope['phone'].getStorage() == '512'}">selected</c:if>>512</option>
+                        <option <c:if test="${requestScope['phone'].getStorage() == '1024'}">selected</c:if>>1024
+                        </option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <td>Xuất xứ: </td>
-                <td><input type="text" name="origin" id="origin" value="${requestScope['phone'].getOrigin()}"></td>
+                <td>Trạng thái:</td>
+                <td>
+                    <select id="status" name="status" required>
+                        <option <c:if test="${requestScope['phone'].getStatus() == 'Hàng mới'}">selected</c:if>>Hàng
+                            mới
+                        </option>
+                        <option <c:if test="${requestScope['phone'].getStatus() == 'Hàng đã sử dụng'}">selected</c:if>>
+                            Hàng đã sử dụng
+                        </option>
+                    </select>
+                </td>
             </tr>
             <tr>
-                <td>Nhãn hiệu: </td>
+                <td>Xuất xứ:</td>
+                <td><input type="text" name="origin" id="origin" value="${requestScope['phone'].getOrigin()}"
+                           pattern="^([A-ZÀ-Ẵ][a-zà-ỹ]*(\s[A-ZÀ-Ẵ][a-zà-ỹ]*)*)?$" required></td>
+            </tr>
+            <tr>
+                <td>Nhãn hiệu:</td>
                 <td>
-                    <select id="brand" name="brand">
-                        <c:forEach var="brand" items="${brands}">
-                            <option value="${brand}"
-                                    <c:if test="${brand == requestScope['phone'].getBrand()}">selected</c:if>>${brand}</option>
-                        </c:forEach>
+                    <select id="brand" name="brand" required>
+                        <option <c:if test="${requestScope['phone'].getBrand() == 'Iphone'}">selected</c:if>>Iphone
+                        </option>
+                        <option <c:if test="${requestScope['phone'].getBrand() == 'Samsung'}">selected</c:if>>Samsung
+                        </option>
+                        <option <c:if test="${requestScope['phone'].getBrand() == 'Oppo'}">selected</c:if>>Oppo</option>
+                        <option <c:if test="${requestScope['phone'].getBrand() == 'Huawei'}">selected</c:if>>Huawei
+                        </option>
+                        <option <c:if test="${requestScope['phone'].getBrand() == 'Xiaomi'}">selected</c:if>>Xiaomi
+                        </option>
+                        <option <c:if test="${requestScope['phone'].getBrand() == 'Vivo'}">selected</c:if>>Xiaomi
+                        </option>
                     </select>
                 </td>
             </tr>
@@ -68,5 +191,9 @@
         </table>
     </fieldset>
 </form>
+
+<p>
+    <a href="/" class="back-button">Quay lại</a>
+</p>
 </body>
 </html>

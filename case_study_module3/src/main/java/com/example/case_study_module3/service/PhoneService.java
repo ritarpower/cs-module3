@@ -4,7 +4,6 @@ import com.example.case_study_module3.model.Phone;
 import com.example.case_study_module3.repository.IPhoneRepository;
 import com.example.case_study_module3.repository.PhoneRepository;
 
-import java.util.Collections;
 import java.util.List;
 
 public class PhoneService implements IPhoneService {
@@ -33,11 +32,6 @@ public class PhoneService implements IPhoneService {
     @Override
     public void delete(Phone phone) {
         phoneRepository.delete(phone);
-    }
-
-    @Override
-    public List<String> findAllBrand() {
-        return phoneRepository.findAllBrand();
     }
 
     @Override

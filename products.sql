@@ -28,5 +28,3 @@ insert into phone(phone_name,phone_price,phone_storage,phone_status,phone_origin
  ("Iphone 16", 1000, 128, "Hàng đã sử dụng", "Việt Nam", 1),
  ("Samsung Galaxy Z Fold 6", 1800, 256, "Hàng mới", "Trung Quốc", 2),
  ("Samsung Galaxy Z Flip 6", 1500, 512, "Hàng mới", "Hàn Quốc", 2);
-
-SELECT * FROM phone WHERE phone_name LIKE "Iphone 16 Plus" AND phone_storage LIKE 256; 

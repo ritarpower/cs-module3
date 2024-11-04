@@ -14,7 +14,7 @@
 <body>
 <h1>Thông tin chi tiết sản phẩm</h1>
 <p>
-    <a href="/">Quay lại danh sách sản phẩm</a>
+    <a href="/">Quay lại trang chính</a>
 </p>
 <table>
     <tr>
