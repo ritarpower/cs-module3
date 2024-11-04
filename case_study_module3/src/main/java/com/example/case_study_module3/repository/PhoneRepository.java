@@ -131,12 +131,13 @@ public class PhoneRepository implements IPhoneRepository {
         List<Phone> phones = new ArrayList<>();
         Connection c = baseRepository.getConnection();
         try {
-            PreparedStatement stmt = c.prepareStatement("SELECT * FROM phone WHERE phone_name LIKE ? AND phone_storage LIKE ?");
+            PreparedStatement stmt = c.prepareStatement("SELECT * FROM phone WHERE phone_name LIKE CONCAT('%',?,'%') AND phone_storage LIKE ?");
             stmt.setString(1, name);
             stmt.setInt(2, storage);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("phone_id");
+                String name1 = rs.getString("phone_name");
                 double price = rs.getDouble("phone_price");
                 String status = rs.getString("phone_status");
                 String origin = rs.getString("phone_origin");
@@ -146,7 +147,7 @@ public class PhoneRepository implements IPhoneRepository {
                 ResultSet rs2 = prepared.executeQuery();
                 if (rs2.next()) {
                     String brand = rs2.getString("brand_name");
-                    phones.add(new Phone(id, name, price, storage, status, origin, brand));
+                    phones.add(new Phone(id, name1, price, storage, status, origin, brand));
                 }
             }
         } catch (SQLException e) {

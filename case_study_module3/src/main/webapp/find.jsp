@@ -79,8 +79,8 @@
 
         .back-button {
             margin-top: 20px;
-            background-color: #007bff;
-            color: white;
+            background-color: #e0e0e0;
+            color: #333;
             border: none;
             padding: 10px;
             border-radius: 4px;
@@ -90,7 +90,7 @@
         }
 
         .back-button:hover {
-            background-color: #0056b3;
+            background-color: #e0e0e0;
         }
 
         .message {
