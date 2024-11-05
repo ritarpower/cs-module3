@@ -22,6 +22,7 @@
         }
 
         div {
+            margin-top: 20px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -64,8 +65,8 @@
         }
 
         input[type="submit"] {
-            background-color: #1a73e8;
-            color: white;
+            background-color: #ffc107;
+            color: black;
             border: none;
             padding: 12px;
             border-radius: 4px;
@@ -76,7 +77,7 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #155ab6;
+            background-color: #ddc107;
         }
 
         a {
@@ -184,8 +185,7 @@
                 </td>
             </tr>
             <tr>
-                <td></td>
-                <td><input type="submit" value="Xác nhận"></td>
+                <td colspan="2""><input type="submit" value="Xác nhận"></td>
             </tr>
         </table>
     </fieldset>

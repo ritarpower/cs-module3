@@ -121,8 +121,7 @@
                 </td>
             </tr>
             <tr>
-                <td></td>
-                <td><input type="submit" value="Tìm kiếm"></td>
+                <td colspan="2"><input type="submit" value="Tìm kiếm"></td>
             </tr>
         </table>
     </fieldset>

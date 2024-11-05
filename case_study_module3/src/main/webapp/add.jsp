@@ -22,6 +22,7 @@
         }
 
         div {
+            margin-top: 20px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -175,8 +176,7 @@
                 </td>
             </tr>
             <tr>
-                <td></td>
-                <td><input type="submit" value="Thêm mới"></td>
+                <td colspan="2"><input type="submit" value="Thêm mới"></td>
             </tr>
         </table>
     </fieldset>
