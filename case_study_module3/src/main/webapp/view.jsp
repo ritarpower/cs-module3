@@ -118,7 +118,7 @@
         <td>${requestScope["phone"].getOrigin()}</td>
     </tr>
     <tr>
-        <td>Nhãn hiệu:</td>
+        <td>Hãng:</td>
         <td>${requestScope["phone"].getBrand()}</td>
     </tr>
 </table>

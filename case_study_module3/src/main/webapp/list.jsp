@@ -18,23 +18,21 @@
 
 <h1 class="text-center my-4">Danh sách sản phẩm điện thoại</h1>
 
-<c:choose>
-    <c:when test="${not empty sessionScope.user}">
-        <div class="text-center mb-4">
-            <a href="?action=add" class="btn btn-primary mx-2">Thêm mới</a>
-            <a href="?action=find" class="btn btn-success mx-2">Tìm kiếm</a>
-            <a href="?action=logout" class="btn btn-success mx-2">Đăng xuất</a><br>
-            <p>Tài khoản đang đăng nhập: <strong>${sessionScope.user}</strong></p>
-        </div>
-    </c:when>
-    <c:otherwise>
-        <div class="text-center mb-4">
-            <a href="?action=find" class="btn btn-success mx-2">Tìm kiếm</a>
-            <a href="?action=login" class="btn btn-primary mx-2">Đăng nhập</a><br>
-            <span class="text-danger">Bạn cần đăng nhập để thực hiện các thao tác như thêm mới, sửa và xóa.</span>
-        </div>
-    </c:otherwise>
-</c:choose>
+<c:if test="${not empty sessionScope.user}">
+    <div class="text-center mb-4">
+        <a href="?action=add" class="btn btn-primary mx-2">Thêm mới</a>
+        <a href="?action=find" class="btn btn-success mx-2">Tìm kiếm</a>
+        <a href="?action=logout" class="btn btn-success mx-2">Đăng xuất</a><br>
+        <p>Tài khoản đang đăng nhập: <strong>${sessionScope.user}</strong></p>
+    </div>
+</c:if>
+<c:if test="${empty sessionScope.user}">
+    <div class="text-center mb-4">
+        <a href="?action=find" class="btn btn-success mx-2">Tìm kiếm</a>
+        <a href="?action=login" class="btn btn-primary mx-2">Đăng nhập</a><br>
+        <span class="text-danger">Bạn cần đăng nhập để thực hiện các thao tác như thêm mới, sửa và xóa.</span>
+    </div>
+</c:if>
 
 <div class="container">
     <div class="row">
@@ -45,6 +43,7 @@
                         <h5 class="card-title" style="text-align: center">${p.getName()}</h5>
                         <p class="card-text">Dung lượng: ${p.getStorage()} GB</p>
                         <p class="card-text">Trạng thái: ${p.getStatus()}</p>
+                        <p class="card-text">Hãng: ${p.getBrand()}</p>
                         <p class="card-text" style="text-align: center"><strong>Giá: ${p.getPrice()} $</strong></p>
                         <p style="text-align: center">
                             <a href="?action=view&id=${p.getId()}" class="btn btn-info btn-sm">Xem chi tiết</a>

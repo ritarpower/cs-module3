@@ -148,7 +148,7 @@
                 <th>Dung lượng</th>
                 <th>Trạng thái</th>
                 <th>Xuất xứ</th>
-                <th>Nhãn hiệu</th>
+                <th>Hãng</th>
             </tr>
             </thead>
             <tbody>

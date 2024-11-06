@@ -120,7 +120,7 @@
                     <td>${requestScope["phone"].getOrigin()}</td>
                 </tr>
                 <tr>
-                    <th>Nhãn hiệu:</th>
+                    <th>Hãng:</th>
                     <td>${requestScope["phone"].getBrand()}</td>
                 </tr>
                 <tr class="no-hover">

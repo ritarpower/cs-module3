@@ -167,7 +167,7 @@
                            pattern="^([A-ZÀ-Ẵ][a-zà-ỹ]*(\s[A-ZÀ-Ẵ][a-zà-ỹ]*)*)?$" required></td>
             </tr>
             <tr>
-                <td>Nhãn hiệu:</td>
+                <td>Hãng:</td>
                 <td>
                     <select id="brand" name="brand" required>
                         <option <c:if test="${requestScope['phone'].getBrand() == 'Iphone'}">selected</c:if>>Iphone

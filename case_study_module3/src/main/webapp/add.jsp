@@ -163,7 +163,7 @@
                            required></td>
             </tr>
             <tr>
-                <td>Nhãn hiệu:</td>
+                <td>Hãng:</td>
                 <td>
                     <select id="brand" name="brand" required>
                         <option>Iphone</option>
