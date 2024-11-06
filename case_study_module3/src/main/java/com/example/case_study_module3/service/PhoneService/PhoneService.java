@@ -1,8 +1,8 @@
-package com.example.case_study_module3.service;
+package com.example.case_study_module3.service.PhoneService;
 
 import com.example.case_study_module3.model.Phone;
-import com.example.case_study_module3.repository.IPhoneRepository;
-import com.example.case_study_module3.repository.PhoneRepository;
+import com.example.case_study_module3.repository.PhoneRepository.IPhoneRepository;
+import com.example.case_study_module3.repository.PhoneRepository.PhoneRepository;
 
 import java.util.List;
 

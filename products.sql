@@ -7,6 +7,11 @@ CREATE TABLE brand (
     brand_name VARCHAR(50)
 );
 
+CREATE TABLE user (
+	user_name VARCHAR(50),
+	user_password VARCHAR(50)
+);
+
 CREATE TABLE phone (
     phone_id INT PRIMARY KEY AUTO_INCREMENT,
     phone_name VARCHAR(50),
@@ -18,6 +23,8 @@ CREATE TABLE phone (
     FOREIGN KEY (brand_id)
         REFERENCES brand (brand_id)
 );
+
+insert into user(user_name, user_password) values("admin", "admin"), ("member", "member");
 
 insert into brand(brand_name) values("Iphone"), ("Samsung"), ("Oppo"), ("Huawei"), ("Vivo"), ("Xiaomi");
 

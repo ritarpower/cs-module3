@@ -303,7 +303,8 @@
                 </tr>
                 <tr class="no-hover">
                     <td colspan="2" class="text-center">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#confirmModal">
                             Xóa
                         </button>
                     </td>

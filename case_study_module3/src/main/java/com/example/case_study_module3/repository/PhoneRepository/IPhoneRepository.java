@@ -1,4 +1,4 @@
-package com.example.case_study_module3.repository;
+package com.example.case_study_module3.repository.PhoneRepository;
 
 import com.example.case_study_module3.model.Phone;
 

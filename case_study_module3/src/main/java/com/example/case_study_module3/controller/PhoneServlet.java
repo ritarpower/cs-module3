@@ -1,8 +1,11 @@
 package com.example.case_study_module3.controller;
 
 import com.example.case_study_module3.model.Phone;
-import com.example.case_study_module3.service.IPhoneService;
-import com.example.case_study_module3.service.PhoneService;
+import com.example.case_study_module3.model.User;
+import com.example.case_study_module3.service.PhoneService.IPhoneService;
+import com.example.case_study_module3.service.PhoneService.PhoneService;
+import com.example.case_study_module3.service.UserService.IUserService;
+import com.example.case_study_module3.service.UserService.UserService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -13,10 +16,12 @@ import java.util.List;
 @WebServlet(name = "PhoneServlet", value = "")
 public class PhoneServlet extends HttpServlet {
     private final IPhoneService phoneService = new PhoneService();
+    private final IUserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -37,9 +42,38 @@ public class PhoneServlet extends HttpServlet {
             case "find":
                 showFindForm(request, response);
                 break;
+            case "login":
+                showLoginForm(request, response);
+                break;
+            case "logout":
+                logout(request, response);
+                break;
             default:
                 showList(request, response);
                 break;
+        }
+    }
+
+    private void logout(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        try {
+            response.sendRedirect("/");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void showLoginForm(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -155,9 +189,44 @@ public class PhoneServlet extends HttpServlet {
             case "find":
                 find(request, response);
                 break;
+            case "login":
+                login(request, response);
+                break;
             default:
                 break;
         }
+    }
+
+    private void login(HttpServletRequest request, HttpServletResponse response) {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        if (isValidUser(username, password)) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", username);
+            try {
+                response.sendRedirect("/");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            request.setAttribute("message", "Sai tên đăng nhập hoặc mật khẩu!");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+            try {
+                dispatcher.forward(request, response);
+            } catch (ServletException | IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private boolean isValidUser(String username, String password) {
+        List<User> users = userService.findAll();
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserName().equals(username) && users.get(i).getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void find(HttpServletRequest request, HttpServletResponse response) {
