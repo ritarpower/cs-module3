@@ -307,9 +307,8 @@ public class PhoneServlet extends HttpServlet {
     private void delete(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         Phone phone = phoneService.findById(id);
-        RequestDispatcher dispatcher;
         if (phone == null) {
-            dispatcher = request.getRequestDispatcher("error-404.jsp");
+            request.getRequestDispatcher("error-404.jsp");
         } else {
             phoneService.delete(phone);
             try {

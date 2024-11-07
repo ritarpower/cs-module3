@@ -98,8 +98,7 @@
 
 <table>
     <tr>
-        <td>Tên sản phẩm:</td>
-        <td>${requestScope["phone"].getName()}</td>
+        <td colspan="2" style="text-align: center;font-size: 20px">${requestScope["phone"].getName()}</td>
     </tr>
     <tr>
         <td>Giá sản phẩm ($):</td>
