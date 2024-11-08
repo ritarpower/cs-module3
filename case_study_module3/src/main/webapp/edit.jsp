@@ -170,22 +170,27 @@
                 <td>Hãng:</td>
                 <td>
                     <select id="brand" name="brand" required>
-                        <option <c:if test="${requestScope['phone'].getBrand() == 'Iphone'}">selected</c:if>>Iphone
-                        </option>
-                        <option <c:if test="${requestScope['phone'].getBrand() == 'Samsung'}">selected</c:if>>Samsung
-                        </option>
-                        <option <c:if test="${requestScope['phone'].getBrand() == 'Oppo'}">selected</c:if>>Oppo</option>
-                        <option <c:if test="${requestScope['phone'].getBrand() == 'Huawei'}">selected</c:if>>Huawei
-                        </option>
-                        <option <c:if test="${requestScope['phone'].getBrand() == 'Xiaomi'}">selected</c:if>>Xiaomi
-                        </option>
-                        <option <c:if test="${requestScope['phone'].getBrand() == 'Vivo'}">selected</c:if>>Xiaomi
-                        </option>
+                            <c:forEach items="${brands}" var="b">
+                                <option <c:if test="${b.getName() == requestScope['phone'].getBrand()}">selected</c:if>>${b.getName()}
+                                </option>
+                            </c:forEach>
+<%--                        <option <c:if test="${requestScope['phone'].getBrand() == 'Iphone'}">selected</c:if>>Iphone--%>
+<%--                        </option>--%>
+<%--                        <option <c:if test="${requestScope['phone'].getBrand() == 'Samsung'}">selected</c:if>>Samsung--%>
+<%--                        </option>--%>
+<%--                        <option <c:if test="${requestScope['phone'].getBrand() == 'Oppo'}">selected</c:if>>Oppo--%>
+<%--                        </option>--%>
+<%--                        <option <c:if test="${requestScope['phone'].getBrand() == 'Huawei'}">selected</c:if>>Huawei--%>
+<%--                        </option>--%>
+<%--                        <option <c:if test="${requestScope['phone'].getBrand() == 'Xiaomi'}">selected</c:if>>Xiaomi--%>
+<%--                        </option>--%>
+<%--                        <option <c:if test="${requestScope['phone'].getBrand() == 'Vivo'}">selected</c:if>>Xiaomi--%>
+<%--                        </option>--%>
                     </select>
                 </td>
             </tr>
             <tr>
-                <td colspan="2""><input type="submit" value="Xác nhận"></td>
+                <td colspan="2"><input type="submit" value="Xác nhận"></td>
             </tr>
         </table>
     </fieldset>

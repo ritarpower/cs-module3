@@ -22,8 +22,8 @@ public class BrandRepository implements IBrandRepository {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(GET_ALL);
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
+                int id = resultSet.getInt("brand_id");
+                String name = resultSet.getString("brand_name");
                 Brand brand = new Brand(id, name);
                 brands.add(brand);
             }

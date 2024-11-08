@@ -1,7 +1,10 @@
 package com.example.case_study_module3.controller;
 
+import com.example.case_study_module3.model.Brand;
 import com.example.case_study_module3.model.Phone;
 import com.example.case_study_module3.model.User;
+import com.example.case_study_module3.service.BrandService.BrandService;
+import com.example.case_study_module3.service.BrandService.IBrandService;
 import com.example.case_study_module3.service.PhoneService.IPhoneService;
 import com.example.case_study_module3.service.PhoneService.PhoneService;
 import com.example.case_study_module3.service.UserService.IUserService;
@@ -11,12 +14,14 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "PhoneServlet", value = "")
 public class PhoneServlet extends HttpServlet {
     private final IPhoneService phoneService = new PhoneService();
     private final IUserService userService = new UserService();
+    private final IBrandService brandService = new BrandService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -90,6 +95,8 @@ public class PhoneServlet extends HttpServlet {
 
     private void showAddForm(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher dispatcher = request.getRequestDispatcher("add.jsp");
+        List<Brand> brands = brandService.getAllBrands();
+        request.setAttribute("brands", brands);
         try {
             dispatcher.forward(request, response);
         } catch (ServletException e) {
@@ -102,10 +109,12 @@ public class PhoneServlet extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         Phone phone = phoneService.findById(id);
+        List<Brand> brands = brandService.getAllBrands();
         RequestDispatcher dispatcher;
         if (phone == null) {
             dispatcher = request.getRequestDispatcher("error-404.jsp");
         } else {
+            request.setAttribute("brands", brands);
             request.setAttribute("phone", phone);
             dispatcher = request.getRequestDispatcher("edit.jsp");
         }

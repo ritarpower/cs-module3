@@ -124,13 +124,13 @@
     </c:if>
 </p>
 
-<form method="post">
+<form method="post" action="/?action=add">
     <fieldset>
         <legend>Nhập thông tin sản phẩm</legend>
         <table>
             <tr>
                 <td>Tên sản phẩm:</td>
-                <td><input type="text" name="name" id="name" pattern="^[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$" required></td>
+                <td><input type="text" name="name" id="name" pattern="^[a-zA-Z0-9 ](1,50)$" required></td>
             </tr>
             <tr>
                 <td>Giá sản phẩm ($):</td>
@@ -166,12 +166,9 @@
                 <td>Hãng:</td>
                 <td>
                     <select id="brand" name="brand" required>
-                        <option>Iphone</option>
-                        <option>Samsung</option>
-                        <option>Oppo</option>
-                        <option>Huawei</option>
-                        <option>Xiaomi</option>
-                        <option>Vivo</option>
+                        <c:forEach items="${brands}" var="b">
+                            <option>${b.getName()}</option>
+                        </c:forEach>
                     </select>
                 </td>
             </tr>

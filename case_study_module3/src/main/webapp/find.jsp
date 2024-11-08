@@ -101,7 +101,7 @@
 </head>
 <body>
 
-<form method="post">
+<form method="post" action="/?action=find">
     <fieldset>
         <legend>Nhập thông tin tìm kiếm sản phẩm</legend>
         <table>

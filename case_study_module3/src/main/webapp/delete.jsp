@@ -95,7 +95,7 @@
 </head>
 <body>
 <div class="form-container">
-    <form id="deleteForm" method="post">
+    <form id="deleteForm" method="post" action="/?action=delete&id=${requestScope['phone'].getId()}">
         <fieldset>
             <legend class="text-center">Thông tin sản phẩm</legend>
             <table>
