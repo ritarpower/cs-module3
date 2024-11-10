@@ -15,5 +15,9 @@ public interface IPhoneRepository {
 
     void delete(Phone phone);
 
-    List<Phone> findByNameAndStatus(String name, int storage);
+    List<Phone> find(String name,int storage, String brand);
+
+    List<Phone> find(int storage, String brand);
+
+
 }

@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Edit Phone</title>
+    <title>Chỉnh sửa sản phẩm</title>
     <style>
         body {
             display: flex;
@@ -129,11 +129,16 @@
         <table>
             <tr>
                 <td>Tên sản phẩm:</td>
-                <td><input type="text" name="name" id="name" value="${requestScope['phone'].getName()}" pattern="^[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$" required></td>
+                <td><input type="text" name="name" id="name" value="${requestScope['phone'].getName()}"
+                           pattern="^[A-Z][a-zA-Z0-9\s]{1,50}$"
+                           title="Tên không dài quá 50 kí tự, không chứa kí tự đặc biệt và in hoa chữ cái đầu!"
+                           required></td>
             </tr>
             <tr>
                 <td>Giá sản phẩm ($):</td>
-                <td><input type="number" name="price" id="price" value="${requestScope['phone'].getPrice()}" required>
+                <td>
+                    <input type="text" name="price" id="price" value="${requestScope['phone'].getPrice()}"
+                           pattern="^[1-9][0-9]*(\.[0-9]+)?$" title="Số tiền chưa đúng!" required>
                 </td>
             </tr>
             <tr>
@@ -164,28 +169,19 @@
             <tr>
                 <td>Xuất xứ:</td>
                 <td><input type="text" name="origin" id="origin" value="${requestScope['phone'].getOrigin()}"
-                           pattern="^([A-ZÀ-Ẵ][a-zà-ỹ]*(\s[A-ZÀ-Ẵ][a-zà-ỹ]*)*)?$" required></td>
+                           pattern="^[A-ZÀ-Ẵ][a-zA-Zà-ỹ\s]{1,50}$"
+                           title="Tên không dài quá 50 kí tự, in hoa chữ cái đầu và không chứa số, kí tự đặc biệt!"
+                           required></td>
             </tr>
             <tr>
                 <td>Hãng:</td>
                 <td>
                     <select id="brand" name="brand" required>
-                            <c:forEach items="${brands}" var="b">
-                                <option <c:if test="${b.getName() == requestScope['phone'].getBrand()}">selected</c:if>>${b.getName()}
-                                </option>
-                            </c:forEach>
-<%--                        <option <c:if test="${requestScope['phone'].getBrand() == 'Iphone'}">selected</c:if>>Iphone--%>
-<%--                        </option>--%>
-<%--                        <option <c:if test="${requestScope['phone'].getBrand() == 'Samsung'}">selected</c:if>>Samsung--%>
-<%--                        </option>--%>
-<%--                        <option <c:if test="${requestScope['phone'].getBrand() == 'Oppo'}">selected</c:if>>Oppo--%>
-<%--                        </option>--%>
-<%--                        <option <c:if test="${requestScope['phone'].getBrand() == 'Huawei'}">selected</c:if>>Huawei--%>
-<%--                        </option>--%>
-<%--                        <option <c:if test="${requestScope['phone'].getBrand() == 'Xiaomi'}">selected</c:if>>Xiaomi--%>
-<%--                        </option>--%>
-<%--                        <option <c:if test="${requestScope['phone'].getBrand() == 'Vivo'}">selected</c:if>>Xiaomi--%>
-<%--                        </option>--%>
+                        <c:forEach items="${brands}" var="b">
+                            <option
+                                    <c:if test="${b.getName() == requestScope['phone'].getBrand()}">selected</c:if>>${b.getName()}
+                            </option>
+                        </c:forEach>
                     </select>
                 </td>
             </tr>

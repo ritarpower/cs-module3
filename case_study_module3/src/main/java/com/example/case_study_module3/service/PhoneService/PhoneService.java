@@ -4,6 +4,7 @@ import com.example.case_study_module3.model.Phone;
 import com.example.case_study_module3.repository.PhoneRepository.IPhoneRepository;
 import com.example.case_study_module3.repository.PhoneRepository.PhoneRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PhoneService implements IPhoneService {
@@ -35,8 +36,13 @@ public class PhoneService implements IPhoneService {
     }
 
     @Override
-    public List<Phone> findByNameAndStatus(String name, int storage) {
-        return phoneRepository.findByNameAndStatus(name, storage);
+    public List<Phone> find(String name, int storage, String brand) {
+        return phoneRepository.find(name, storage, brand);
+    }
+
+    @Override
+    public List<Phone> find(int storage, String brand) {
+        return phoneRepository.find(storage, brand);
     }
 
 

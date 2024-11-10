@@ -8,6 +8,7 @@ import com.example.case_study_module3.repository.BrandRepository.IBrandRepositor
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PhoneRepository implements IPhoneRepository {
@@ -123,13 +124,15 @@ public class PhoneRepository implements IPhoneRepository {
     }
 
     @Override
-    public List<Phone> findByNameAndStatus(String name, int storage) {
+    public List<Phone> find(String name, int storage, String brand) {
         List<Phone> phones = new ArrayList<>();
+        int brandId = brandRepository.getBrandByName(brand).getId();
         Connection c = baseRepository.getConnection();
         try {
-            PreparedStatement stmt = c.prepareStatement("SELECT * FROM phone WHERE phone_name LIKE CONCAT('%',?,'%') AND phone_storage LIKE ?");
+            PreparedStatement stmt = c.prepareStatement("SELECT * FROM phone WHERE phone_name LIKE CONCAT('%',?,'%') AND phone_storage LIKE ? AND brand_id = ?");
             stmt.setString(1, name);
             stmt.setInt(2, storage);
+            stmt.setInt(3, brandId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("phone_id");
@@ -137,9 +140,31 @@ public class PhoneRepository implements IPhoneRepository {
                 double price = rs.getDouble("phone_price");
                 String status = rs.getString("phone_status");
                 String origin = rs.getString("phone_origin");
-                int brandId = rs.getInt("brand_id");
-                Brand brand = brandRepository.getBrandById(brandId);
-                phones.add(new Phone(id, name1, price, storage, status, origin, brand.getName()));
+                phones.add(new Phone(id, name1, price, storage, status, origin, brand));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return phones;
+    }
+
+    @Override
+    public List<Phone> find(int storage, String brand) {
+        List<Phone> phones = new ArrayList<>();
+        int brandId = brandRepository.getBrandByName(brand).getId();
+        Connection c = baseRepository.getConnection();
+        try {
+            PreparedStatement prepared = c.prepareStatement("SELECT * FROM phone WHERE phone_storage LIKE ? AND brand_id = ?");
+            prepared.setInt(1, storage);
+            prepared.setInt(2, brandId);
+            ResultSet rs = prepared.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("phone_id");
+                String name = rs.getString("phone_name");
+                double price = rs.getDouble("phone_price");
+                String status = rs.getString("phone_status");
+                String origin = rs.getString("phone_origin");
+                phones.add(new Phone(id, name, price, storage, status, origin, brand));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

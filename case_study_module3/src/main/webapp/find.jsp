@@ -101,31 +101,31 @@
 </head>
 <body>
 
-<form method="post" action="/?action=find">
-    <fieldset>
-        <legend>Nhập thông tin tìm kiếm sản phẩm</legend>
-        <table>
-            <tr>
-                <td>Tên sản phẩm:</td>
-                <td><input type="text" name="name" id="name" pattern="^[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$" required></td>
-            </tr>
-            <tr>
-                <td>Dung lượng (GB):</td>
-                <td>
-                    <select id="storage" name="storage" required>
-                        <option>128</option>
-                        <option>256</option>
-                        <option>512</option>
-                        <option>1024</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="submit" value="Tìm kiếm"></td>
-            </tr>
-        </table>
-    </fieldset>
-</form>
+<%--<form method="post" action="/?action=find">--%>
+<%--    <fieldset>--%>
+<%--        <legend>Nhập thông tin tìm kiếm sản phẩm</legend>--%>
+<%--        <table>--%>
+<%--            <tr>--%>
+<%--                <td>Tên sản phẩm:</td>--%>
+<%--                <td><input type="text" name="name" id="name" pattern="^[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$" required></td>--%>
+<%--            </tr>--%>
+<%--            <tr>--%>
+<%--                <td>Dung lượng (GB):</td>--%>
+<%--                <td>--%>
+<%--                    <select id="storage" name="storage" required>--%>
+<%--                        <option>128</option>--%>
+<%--                        <option>256</option>--%>
+<%--                        <option>512</option>--%>
+<%--                        <option>1024</option>--%>
+<%--                    </select>--%>
+<%--                </td>--%>
+<%--            </tr>--%>
+<%--            <tr>--%>
+<%--                <td colspan="2"><input type="submit" value="Tìm kiếm"></td>--%>
+<%--            </tr>--%>
+<%--        </table>--%>
+<%--    </fieldset>--%>
+<%--</form>--%>
 
 <p>
     <a href="/" class="back-button">Quay lại</a>

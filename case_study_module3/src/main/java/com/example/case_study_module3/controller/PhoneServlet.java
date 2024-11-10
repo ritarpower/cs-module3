@@ -167,6 +167,8 @@ public class PhoneServlet extends HttpServlet {
 
     private void showList(HttpServletRequest request, HttpServletResponse response) {
         List<Phone> phones = phoneService.findAll();
+        List<Brand> brands = brandService.getAllBrands();
+        request.setAttribute("brands", brands);
         request.setAttribute("phones", phones);
         RequestDispatcher dispatcher = request.getRequestDispatcher("list.jsp");
         try {
@@ -239,17 +241,26 @@ public class PhoneServlet extends HttpServlet {
     }
 
     private void find(HttpServletRequest request, HttpServletResponse response) {
+        List<Brand> brands = brandService.getAllBrands();
         String name = request.getParameter("name");
         int storage = Integer.parseInt(request.getParameter("storage"));
-        List<Phone> phones = phoneService.findByNameAndStatus(name, storage);
+        String brand = request.getParameter("brand");
+        List<Phone> phones;
+        if(name.isEmpty()){
+            phones = phoneService.find(storage, brand);
+        } else {
+            phones = phoneService.find(name, storage, brand);
+        }
         RequestDispatcher dispatcher;
         if (phones.isEmpty()) {
+            dispatcher = request.getRequestDispatcher("list.jsp");
+            request.setAttribute("brands", brands);
             request.setAttribute("message", "Không tìm thấy sản phẩm!");
-            dispatcher = request.getRequestDispatcher("find.jsp");
         } else {
+            dispatcher = request.getRequestDispatcher("list.jsp");
             request.setAttribute("message", "Tìm thấy " + phones.size() + " sản phẩm:");
             request.setAttribute("phones", phones);
-            dispatcher = request.getRequestDispatcher("find.jsp");
+            request.setAttribute("brands", brands);
         }
         try {
             dispatcher.forward(request, response);
@@ -261,6 +272,7 @@ public class PhoneServlet extends HttpServlet {
     }
 
     private void add(HttpServletRequest request, HttpServletResponse response) {
+        List<Brand> brands = brandService.getAllBrands();
         String name = request.getParameter("name");
         double price = Double.parseDouble(request.getParameter("price"));
         int storage = Integer.parseInt(request.getParameter("storage"));
@@ -270,6 +282,7 @@ public class PhoneServlet extends HttpServlet {
         Phone phone = new Phone(name, price, storage, status, origin, brand);
         phoneService.add(phone);
         RequestDispatcher dispatcher = request.getRequestDispatcher("add.jsp");
+        request.setAttribute("brands", brands);
         request.setAttribute("message", "Đã thêm mới thành công!");
         try {
             dispatcher.forward(request, response);
@@ -281,6 +294,7 @@ public class PhoneServlet extends HttpServlet {
     }
 
     private void edit(HttpServletRequest request, HttpServletResponse response) {
+        List<Brand> brands = brandService.getAllBrands();
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         double price = Double.parseDouble(request.getParameter("price"));
@@ -301,6 +315,7 @@ public class PhoneServlet extends HttpServlet {
             phone.setBrand(brand);
             phoneService.edit(phone);
             request.setAttribute("phone", phone);
+            request.setAttribute("brands", brands);
             request.setAttribute("message", "Cập nhật thành công!");
             dispatcher = request.getRequestDispatcher("edit.jsp");
         }

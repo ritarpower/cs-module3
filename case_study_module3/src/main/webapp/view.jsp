@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Phone Detail</title>
+    <title>Mô tả sản phẩm</title>
     <style>
         body {
             font-family: Arial, sans-serif;

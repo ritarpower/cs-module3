@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Add New Phone</title>
+    <title>Thêm mới sản phẩm</title>
     <style>
         body {
             display: flex;
@@ -130,11 +130,14 @@
         <table>
             <tr>
                 <td>Tên sản phẩm:</td>
-                <td><input type="text" name="name" id="name" pattern="^[a-zA-Z0-9 ](1,50)$" required></td>
+                <td><input type="text" name="name" id="name" pattern="^[A-Z][a-zA-Z0-9\s]{1,50}$"
+                           title="Tên không dài quá 50 kí tự, không chứa kí tự đặc biệt và in hoa chữ cái đầu!"
+                           required></td>
             </tr>
             <tr>
                 <td>Giá sản phẩm ($):</td>
-                <td><input type="number" step="any" pattern="[+]?[0-9]*[.]?[0-9]+" name="price" id="price" required>
+                <td><input type="text" name="price" id="price" pattern="^[1-9][0-9]*(\.[0-9]+)?$" title="Số tiền chưa đúng!"
+                           required>
                 </td>
             </tr>
             <tr>
@@ -159,7 +162,8 @@
             </tr>
             <tr>
                 <td>Xuất xứ:</td>
-                <td><input type="text" name="origin" id="origin" pattern="^([A-ZÀ-Ẵ][a-zà-ỹ]*(\s[A-ZÀ-Ẵ][a-zà-ỹ]*)*)?$"
+                <td><input type="text" name="origin" id="origin" pattern="^[A-ZÀ-Ẵ][a-zA-Zà-ỹ\s]{1,50}$"
+                           title="Tên không dài quá 50 kí tự, in hoa chữ cái đầu và không chứa số, kí tự đặc biệt!"
                            required></td>
             </tr>
             <tr>
@@ -171,6 +175,10 @@
                         </c:forEach>
                     </select>
                 </td>
+            </tr>
+            <tr>
+                <td>Chọn hình ảnh:</td>
+                <td><input type="file" name="image" id="image" accept="image/*" required></td>
             </tr>
             <tr>
                 <td colspan="2"><input type="submit" value="Thêm mới"></td>
