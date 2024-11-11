@@ -123,7 +123,7 @@
     </c:if>
 </p>
 
-<form method="post">
+<form method="post" action="/?action=edit&id=${requestScope['phone'].getId()}">
     <fieldset>
         <legend>Nhập thông tin mới của sản phẩm</legend>
         <table>

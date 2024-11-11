@@ -38,9 +38,6 @@ public class PhoneServlet extends HttpServlet {
             case "edit":
                 showEditForm(request, response);
                 break;
-            case "delete":
-                showDeleteForm(request, response);
-                break;
             case "view":
                 showViewForm(request, response);
                 break;
@@ -127,24 +124,24 @@ public class PhoneServlet extends HttpServlet {
         }
     }
 
-    private void showDeleteForm(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Phone phone = phoneService.findById(id);
-        RequestDispatcher dispatcher;
-        if (phone == null) {
-            dispatcher = request.getRequestDispatcher("error-404.jsp");
-        } else {
-            request.setAttribute("phone", phone);
-            dispatcher = request.getRequestDispatcher("delete.jsp");
-        }
-        try {
-            dispatcher.forward(request, response);
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    private void showDeleteForm(HttpServletRequest request, HttpServletResponse response) {
+//        int id = Integer.parseInt(request.getParameter("id"));
+//        Phone phone = phoneService.findById(id);
+//        RequestDispatcher dispatcher;
+//        if (phone == null) {
+//            dispatcher = request.getRequestDispatcher("error-404.jsp");
+//        } else {
+//            request.setAttribute("phone", phone);
+//            dispatcher = request.getRequestDispatcher("delete.jsp");
+//        }
+//        try {
+//            dispatcher.forward(request, response);
+//        } catch (ServletException e) {
+//            throw new RuntimeException(e);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     private void showViewForm(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
