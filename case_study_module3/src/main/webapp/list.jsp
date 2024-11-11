@@ -82,8 +82,8 @@
             width: 30px;
             height: 30px;
             font-size: 20px;
-            color: white;
-            background-color: red;
+            color: red;
+            background-color: white;
             border: none;
             border-radius: 5px;
             display: flex;
@@ -94,7 +94,8 @@
         }
 
         .btn-delete:hover {
-            color: darkred;
+            color: white;
+            background-color: red;
         }
 
         .back-button {
@@ -186,10 +187,10 @@
                            placeholder="Tên sản phẩm"></td>
                 <td>
                     <select id="storage" name="storage" class="form-control me-2">
-                        <option>128</option>
-                        <option>256</option>
-                        <option>512</option>
-                        <option>1024</option>
+                        <option value="128">128GB</option>
+                        <option value="256">256GB</option>
+                        <option value="512">512GB</option>
+                        <option value="1024">1TB</option>
                     </select>
                 </td>
                 <td>
@@ -259,13 +260,21 @@
                             <img src="${pageContext.request.contextPath}/images/samsung-galaxy-z-flip6-xanh.jpg" class="card-img-top"
                                  alt="${p.getName()}" style="max-height: 350px; object-fit: cover;">
                         </c:when>
+                        <c:when test="${p.getName() == 'Oppo Reno 12'}">
+                            <img src="${pageContext.request.contextPath}/images/oppo-reno12-5g.jpg" class="card-img-top"
+                                 alt="${p.getName()}" style="max-height: 350px; object-fit: cover;">
+                        </c:when>
+                        <c:when test="${p.getName() == 'Xiaomi Redmi Note 13'}">
+                            <img src="${pageContext.request.contextPath}/images/xiaomi-redmi-note-13.jpg" class="card-img-top"
+                                 alt="${p.getName()}" style="max-height: 350px; object-fit: cover;">
+                        </c:when>
                     </c:choose>
                     <div class="card-body">
                         <h5 class="card-title" style="text-align: center">${p.getName()}</h5>
                         <p class="card-text" style="text-align: center">Hãng: ${p.getBrand()}</p>
                         <p class="card-text" style="text-align: center"><strong>${p.getPrice()} $</strong></p>
                         <p style="text-align: center">
-                            <a href="?action=view&id=${p.getId()}" class="btn btn-info btn-sm">Xem chi tiết</a>
+                            <a href="?action=view&id=${p.getId()}" class="btn btn-primary btn-sm">Xem chi tiết</a>
                             <c:if test="${sessionScope.user.equals('admin')}">
                                 <a href="?action=edit&id=${p.getId()}" class="btn btn-warning btn-sm">Cập nhật</a>
                                 <button class="btn-delete" onclick="openDeleteModal(${p.getId()})">&#10005;</button>

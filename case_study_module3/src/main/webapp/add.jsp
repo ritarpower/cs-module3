@@ -144,10 +144,10 @@
                 <td>Dung lượng (GB):</td>
                 <td>
                     <select name="storage" id="storage" required>
-                        <option>128</option>
-                        <option>256</option>
-                        <option>512</option>
-                        <option>1024</option>
+                        <option value="128">128GB</option>
+                        <option value="256">256GB</option>
+                        <option value="512">512GB</option>
+                        <option value="1024">1TB</option>
                     </select>
                 </td>
             </tr>

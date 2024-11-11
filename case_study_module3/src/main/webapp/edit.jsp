@@ -142,14 +142,13 @@
                 </td>
             </tr>
             <tr>
-                <td>Dung lượng sản phẩm (GB):</td>
+                <td>Dung lượng sản phẩm:</td>
                 <td>
                     <select id="storage" name="storage" required>
-                        <option <c:if test="${requestScope['phone'].getStorage() == '128'}">selected</c:if>>128</option>
-                        <option <c:if test="${requestScope['phone'].getStorage() == '256'}">selected</c:if>>256</option>
-                        <option <c:if test="${requestScope['phone'].getStorage() == '512'}">selected</c:if>>512</option>
-                        <option <c:if test="${requestScope['phone'].getStorage() == '1024'}">selected</c:if>>1024
-                        </option>
+                        <option <c:if test="${requestScope['phone'].getStorage() == '128'}">selected</c:if> value="128">128GB</option>
+                        <option <c:if test="${requestScope['phone'].getStorage() == '256'}">selected</c:if> value="256">256GB</option>
+                        <option <c:if test="${requestScope['phone'].getStorage() == '512'}">selected</c:if> value="512">512GB</option>
+                        <option <c:if test="${requestScope['phone'].getStorage() == '1024'}">selected</c:if> value="1024">1TB</option>
                     </select>
                 </td>
             </tr>
