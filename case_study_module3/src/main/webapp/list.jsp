@@ -277,7 +277,7 @@
                             <a href="?action=view&id=${p.getId()}" class="btn btn-primary btn-sm">Xem chi tiết</a>
                             <c:if test="${sessionScope.user.equals('admin')}">
                                 <a href="?action=edit&id=${p.getId()}" class="btn btn-warning btn-sm">Cập nhật</a>
-                                <button class="btn-delete" onclick="openDeleteModal(${p.getId()})">&#10005;</button>
+                                <button class="btn-delete" onclick="openDeleteModal(${p.getId()},'${p.getName()}')">&#10005;</button>
                             </c:if>
                             <c:if test="${sessionScope.user.equals('member')}">
                                 <a href="?action=edit&id=${p.getId()}" class="btn btn-warning btn-sm">Cập nhật</a>
@@ -298,7 +298,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Bạn có chắc chắn muốn xóa sản phẩm này không?
+                Bạn có chắc chắn muốn xóa sản phẩm <strong id="namePhone"></strong> này không?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -309,8 +309,9 @@
 </div>
 
 <script>
-    function openDeleteModal(id) {
+    function openDeleteModal(id, namePhone) {
         document.getElementById('deleteId').value = id;
+        document.getElementById('namePhone').textContent = namePhone;
         let modal;
         modal = new bootstrap.Modal(document.getElementById('confirmModal'));
         modal.show();
